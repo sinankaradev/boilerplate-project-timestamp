@@ -24,6 +24,50 @@ app.get("/api/hello", function (req, res) {
   res.json({greeting: 'hello API'});
 });
 
+//empty date_string
+app.get('/api/timestamp/', function (req, res) {
+  res.send(new Date());
+});
+
+app.get('/api/timestamp/:date_string', function (req, res) {
+  var dateParam = req.params['date_string'];
+  console.log(dateParam);
+  var numDateParam = parseInt(dateParam);
+  console.log(numDateParam + " type is " + typeof numDateParam);
+  
+  if(typeof numDateParam == "number"){
+    // Convert timestamp to milliseconds
+    var date = new Date(numDateParam*1000);
+    // Year
+    var year = date.getFullYear();
+    // Month
+    var month = date.getMonth();
+    // Day
+    var day = date.getDate();
+
+    var convdataTime = month+'-'+day+'-'+year;
+    console.log(convdataTime);
+    res.send({"unix": numDateParam, "utc" : convdataTime })
+
+  }
+
+  if (condition) {
+    
+  }
+  
+  
+
+  //valid date_string
+  if (dateParam == '') {
+
+  }
+  //invalid date_string
+  else{
+
+  }
+});
+
+
 
 
 // listen for requests :)
